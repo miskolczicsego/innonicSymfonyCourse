@@ -20,13 +20,14 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $p1 = new Post();
+        $t1 = new Tag();
         $p1->setTitle('mdsamldaksd');
         $p1->setBody('léfflsédflésdf');
         $p1->setAuthor($this->getAuthor($manager, 'David'));
-
-        $t1 = new Tag();
         $t1->setName('körte');
+
         $t1->addPost($p1);
+        $p1->addTag($t1);
 
         $manager->persist($t1);
         $manager->flush();

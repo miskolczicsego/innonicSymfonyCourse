@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+    /**
+     * @param $num
+     * @return array
+     */
+
+    public function findLatest($num)
+    {
+        $qb = $this->getQueryBuilder()
+            ->orderBy('p.createAt', 'desc')
+            ->setMaxResults($num);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    private function getQueryBuilder()
+    {
+        $em = $this->getEntityManager();
+
+        $qb = $em->getRepository('ModelBundle:Post')
+            ->createQueryBuilder('p');
+
+        return $qb;
+    }
 }
