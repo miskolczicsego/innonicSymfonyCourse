@@ -8,6 +8,6 @@ post:
     plural: Bejegyzések
     on: Bejegyzés időpontja
     latest: Legújabb bejegyzések
-    by:
-        author: A bejegyzés készítője
-author: Szerzője
+    by.author: A bejegyzés készítője
+author:
+    empty.posts: Ez a szerző még nem hozott létre egy bejegyzést sem.

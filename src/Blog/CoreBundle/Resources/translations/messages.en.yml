@@ -5,10 +5,11 @@ by: by
 read.more: Read more
 
 post:
+    by: Post by
     plural: Posts
     on: Posted on
     latest: Latest posts
-    by:
-        author: Post by author
+    by.author: Post by author
 
-author: Author
+author:
+ empty.posts: This author did not write post yet.
