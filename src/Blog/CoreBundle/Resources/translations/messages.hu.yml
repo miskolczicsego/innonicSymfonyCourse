@@ -1,6 +1,6 @@
 home: Kezdőlap
 
-by: által
+by: készítette
 
 read.more: Tovább...
 
@@ -8,3 +8,6 @@ post:
     plural: Bejegyzések
     on: Bejegyzés időpontja
     latest: Legújabb bejegyzések
+    by:
+        author: A bejegyzés készítője
+author: Szerzője
