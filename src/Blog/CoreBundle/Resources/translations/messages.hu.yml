@@ -9,5 +9,9 @@ post:
     on: Bejegyzés időpontja
     latest: Legújabb bejegyzések
     by.author: A bejegyzés készítője
+    comments: '{0} Nincs komment|[1, Inf] %count% komment'
 author:
     empty.posts: Ez a szerző még nem hozott létre egy bejegyzést sem.
+
+comments:
+    plural: Kommentek

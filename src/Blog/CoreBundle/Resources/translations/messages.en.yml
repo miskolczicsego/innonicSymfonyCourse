@@ -1,8 +1,8 @@
-home: 'Home'
-
+home: Home
 by: by
-
 read.more: Read more
+name: Name
+send: Send
 
 post:
     by: Post by
@@ -10,6 +10,12 @@ post:
     on: Posted on
     latest: Latest posts
     by.author: Post by author
+    comments: '{0} No comments|{1} %count% comment|]1, Inf] %count% comments'
 
 author:
  empty.posts: This author did not write post yet.
+
+comments:
+    plural: Comments
+    singular: Comment
+    write: Write your comment
