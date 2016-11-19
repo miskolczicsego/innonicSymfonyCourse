@@ -1,3 +1,15 @@
+model_post:
+    resource: "@AdminBundle/Controller/PostController.php"
+    type:     annotation
+
+model_author:
+    resource: "@AdminBundle/Controller/AuthorController.php"
+    type:     annotation
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation

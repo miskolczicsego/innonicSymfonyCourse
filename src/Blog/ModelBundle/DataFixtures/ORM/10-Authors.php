@@ -15,7 +15,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Fixtures for the Author entity
+ * Fixtures for the author entity
  */
 class Authors extends AbstractFixture implements OrderedFixtureInterface
 {
