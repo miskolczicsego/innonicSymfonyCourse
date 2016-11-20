@@ -21,15 +21,19 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface
     {
         $p1 = new Post();
         $t1 = new Tag();
+        $t2 = new Tag();
         $p1->setTitle('mdsamldaksd');
         $p1->setBody('léfflsédflésdf');
         $p1->setAuthor($this->getAuthor($manager, 'David'));
         $t1->setName('körte');
+        $t2->setName('alma');
 
         $t1->addPost($p1);
         $p1->addTag($t1);
+        $p1->addTag($t2);
 
         $manager->persist($t1);
+        $manager->persist($t2);
         $manager->flush();
     }
 

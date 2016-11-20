@@ -1,0 +1,13 @@
+{% extends 'CoreBundle::layout.html.twig' %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+
+{% block section %}
+
+    {% for post in posts %}
+      {{ include('CoreBundle:Post:_post.html.twig', { post: post }) }}
+    {% else %}
+        <p>{{ 'tag.empty.posts' | trans }}</p>
+    {% endfor %}
+{% endblock %}
+

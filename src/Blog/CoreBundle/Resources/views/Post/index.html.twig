@@ -9,11 +9,13 @@
         {% for post in latestPosts %}
             <p><a href="{{ path('blog_core_post_show', { slug: post.slug } ) }}">{{ post.title }}</a></p>
         {% endfor %}
+
+        {{ render(controller('CoreBundle:TagLister:index')) }}
     </aside>
 {% endblock %}
 
 {% block section %}
-{%  for post in posts %}
-    {{ include('CoreBundle:Post:_post.html.twig', {post: post}) }}
-{% endfor%}
+    {%  for post in posts %}
+        {{ include('CoreBundle:Post:_post.html.twig', {post: post}) }}
+    {% endfor%}
 {% endblock %}

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends Controller
@@ -23,7 +24,10 @@ class PostController extends Controller
      */
     public function indexAction()
     {
+//        $tags = $this->getDoctrine()->getRepository('ModelBundle:Tag')->getTagsWhichHasLeastOnePost();
+
         $posts = $this->getDoctrine()->getRepository('ModelBundle:Post')->findAll();
+
         $latestPosts = $this->getDoctrine()->getRepository('ModelBundle:Post')->findLatest(5);
         return array('posts' => $posts, 'latestPosts' => $latestPosts);
     }
@@ -57,7 +61,7 @@ class PostController extends Controller
      * @param Request $request
      * @param string $slug
      *
-     * @return array
+     * @return mixed
      *
      * @Route("/{slug}/create-comment")
      * @Method("POST")

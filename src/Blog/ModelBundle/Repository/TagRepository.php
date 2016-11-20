@@ -3,6 +3,7 @@
 namespace Blog\ModelBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * TagRepository
@@ -12,4 +13,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+    public function getTagsWhichHasLeastOnePost()
+    {
+        $qb = $this->getQueryBuilder();
+
+        $qb->select('t')
+            ->innerJoin('t.posts', 'p')
+            ->groupBy('t.id');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    /**
+     * Get a query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function getQueryBuilder()
+    {
+        $em = $this->getEntityManager();
+
+        $qb = $em->getRepository('ModelBundle:Tag')
+            ->createQueryBuilder('t');
+
+        return $qb;
+    }
 }

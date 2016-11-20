@@ -3,6 +3,7 @@
 namespace Blog\ModelBundle\Repository;
 
 use Blog\ModelBundle\Entity\Post;
+use Blog\ModelBundle\Entity\Tag;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -41,6 +42,21 @@ class PostRepository extends EntityRepository
             ->setMaxResults(1);
 
         return $qb->getQuery()->getSingleResult();
+    }
+
+    /**
+     * Find all post to tag
+     *
+     * @param Tag $tag
+     * @return array
+     */
+    public function findPostToTag($tag)
+    {
+        $qb = $this->getQueryBuilder();
+
+        $qb->join('p.tags', 't', 'WITH', $qb->expr()->in('t.id', $tag->getId()));
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

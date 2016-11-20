@@ -1,0 +1,5 @@
+<h3>{{ 'tag.list' | trans }}</h3>
+|
+{% for tag in tags %}
+    <a href="{{ path('blog_core_taglister_show', { slug: tag.slug } ) }}"> {{ tag.name}}</a> |
+{% endfor %}

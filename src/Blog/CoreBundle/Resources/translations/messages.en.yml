@@ -15,6 +15,9 @@ post:
 author:
  empty.posts: This author did not write post yet.
 
+tag:
+    list: Tags
+
 comments:
     plural: Comments
     singular: Comment
