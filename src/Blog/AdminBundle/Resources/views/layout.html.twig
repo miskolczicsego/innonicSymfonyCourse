@@ -10,6 +10,10 @@
             <ul>
                 <li><a href="{{ path('blog_admin_post_index') }}">Posts</a></li>
                 <li><a href="{{ path('blog_admin_author_index') }}">Authors</a></li>
+                {% if app.user %}
+                    <li><a href="{{ path('blog_admin_security_logout') }}">{{ 'logout' | trans }}</a></li>
+                {% endif %}
+
             </ul>
         </nav>
     </header>
