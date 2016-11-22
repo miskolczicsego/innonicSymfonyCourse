@@ -3,6 +3,8 @@
 namespace Blog\AdminBundle\Controller;
 
 use Blog\ModelBundle\Entity\Post;
+use Blog\ModelBundle\Entity\Tag;
+use Blog\ModelBundle\Form\PostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,7 +47,8 @@ class PostController extends Controller
     public function newAction(Request $request)
     {
         $post = new Post();
-        $form = $this->createForm('Blog\ModelBundle\Form\PostType', $post);
+
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,7 +59,7 @@ class PostController extends Controller
             return $this->redirectToRoute('blog_admin_post_show', array('id' => $post->getId()));
         }
 
-        return $this->render('@Admin/post/new.html.twig', array('post' => $post, 'form' => $form->createView(),));
+        return $this->render('AdminBundle:post:new.html.twig', array('post' => $post, 'form' => $form->createView(),));
     }
 
     /**
