@@ -5,6 +5,11 @@ model_post:
 model_author:
     resource: "@AdminBundle/Controller/AuthorController.php"
     type:     annotation
+
+model_tag:
+    resource: "@AdminBundle/Controller/TagController.php"
+    type:     annotation
+
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation

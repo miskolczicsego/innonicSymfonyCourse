@@ -55,8 +55,7 @@ class TagListerController extends Controller
         }
 
         $postsToTag = $this->getDoctrine()->getRepository('ModelBundle:Post')->findPostToTag($tag);
-
-        dump($postsToTag);
+        
         return array(
             'tag' => $tag,
             'posts' => $postsToTag

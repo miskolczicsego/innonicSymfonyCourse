@@ -22,12 +22,7 @@ security:
             logout:
                 path: blog_admin_security_logout
                 target: /admin/post
-#        dev:
-#            pattern: ^/(_(profiler|wdt)|css|images|js)/
-#            security: false
 
     access_control:
-        # this is a catch-all for the admin area
-        # additional security lives in the controllers
         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, roles: ROLE_ADMIN }

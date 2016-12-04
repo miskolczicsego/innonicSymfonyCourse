@@ -2,16 +2,20 @@
 
 namespace Blog\CoreBundle\Controller;
 
-use Blog\ModelBundle\Entity\Comment;
 use Blog\ModelBundle\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class PostController
+ * @package Blog\CoreBundle\Controller
+ *
+ * @Route("/{_locale}", requirements={"_locale"="en|hu"}, defaults={"_locale"="en"})
+ */
 class PostController extends Controller
 {
     /**
@@ -24,11 +28,10 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-//        $tags = $this->getDoctrine()->getRepository('ModelBundle:Tag')->getTagsWhichHasLeastOnePost();
+        $posts = $this->getPostManager()->getAllPosts();
 
-        $posts = $this->getDoctrine()->getRepository('ModelBundle:Post')->findAll();
+        $latestPosts = $this->getPostManager()->getLatestPosts(5);
 
-        $latestPosts = $this->getDoctrine()->getRepository('ModelBundle:Post')->findLatest(5);
         return array('posts' => $posts, 'latestPosts' => $latestPosts);
     }
 
@@ -44,11 +47,7 @@ class PostController extends Controller
      */
     public function showAction($slug)
     {
-        $post = $this->getDoctrine()->getRepository('ModelBundle:Post')->findOneBy(array('slug' => $slug));
-
-        if (null === $post) {
-            throw $this->createNotFoundException('Post not found');
-        }
+        $post = $this->getPostManager()->findBySlug($slug);
 
         $form = $this->createForm(new CommentType());
 
@@ -69,29 +68,29 @@ class PostController extends Controller
      */
     public function createCommentAction(Request $request, $slug)
     {
-        $post = $this->getDoctrine()->getRepository('ModelBundle:Post')->findOneBy(array('slug' => $slug));
+        $post = $this->getPostManager()->findBySlug($slug);
 
-        if (null === $post) {
-            throw $this->createNotFoundException('Post was not found');
-        }
+        $form = $this->getPostManager()->createComment($post, $request);
 
-        $comment = new Comment();
-        $comment->setPost($post);
-
-        $form = $this->createForm(new CommentType(), $comment);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($comment);
-            $this->getDoctrine()->getManager()->flush();
-
+        if (true === $form) {
             $this->get('session')->getFlashBag()->add('success', 'Your comment was sudmitted successfully');
 
-            return $this->redirect($this->generateUrl('blog_core_post_show', array('slug' => $post->getSlug())));
+            $this->redirect(
+                $this->generateUrl(
+                    'blog_core_post_show',
+                    array('slug' => $post->getSlug())
+                )
+            );
         }
         return array(
-            'post' => $post, 'form' => $form->createView()
+            'post' => $post,
+            'form' => $form->createView()
         );
+    }
+
+    public function getPostManager()
+    {
+        return $this->container->get('post_manager');
     }
 
 }

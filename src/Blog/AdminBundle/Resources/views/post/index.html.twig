@@ -1,16 +1,16 @@
 {% extends 'AdminBundle::layout.html.twig' %}
 
 {% block section %}
-    <h1>Posts list</h1>
+    <h3>Posts list</h3>
 
-    <table>
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>Body</th>
-                <th>Actions</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Slug</th>
+                <th class="text-center">Body</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,12 +22,9 @@
                 <td>{{ post.body }}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('blog_admin_post_show', { 'id': post.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('blog_admin_post_edit', { 'id': post.id }) }}">edit</a>
-                        </li>
+                        <a href="{{ path('blog_admin_post_show', { 'id': post.id }) }}" class="btn btn-primary btn-bg">show</a>
+                        <a href="{{ path('blog_admin_post_edit', { 'id': post.id }) }}"  class="btn btn-success
+                        btn-bg">edit</a>
                     </ul>
                 </td>
             </tr>
@@ -36,8 +33,6 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('blog_admin_post_new') }}">Create a new post</a>
-        </li>
+        <a href="{{ path('blog_admin_post_new') }}" class="btn btn-default btn-lg">Create a new post</a>
     </ul>
 {% endblock %}

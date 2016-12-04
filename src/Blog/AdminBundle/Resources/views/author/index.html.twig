@@ -1,31 +1,29 @@
 {% extends 'AdminBundle::layout.html.twig' %}
 
-{% block body %}
-    <h1>Authors list</h1>
+{% block section %}
+    <h3>Authors list</h3>
 
-    <table>
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Actions</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Slug</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for author in authors %}
             <tr>
-                <td><a href="{{ path('blog_admin_author_show', { 'id': author.id }) }}">{{ author.id }}</a></td>
-                <td>{{ author.name }}</td>
-                <td>{{ author.slug }}</td>
-                <td>
+                <td class="text-center"><a href="{{ path('blog_admin_author_show', { 'id': author.id }) }}">{{ author.id }}</a></td>
+                <td class="text-center">{{ author.name }}</td>
+                <td class="text-center">{{ author.slug }}</td>
+                <td class="text-center">
                     <ul>
-                        <li>
-                            <a href="{{ path('blog_admin_author_show', { 'id': author.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('blog_admin_author_edit', { 'id': author.id }) }}">edit</a>
-                        </li>
+                            <a href="{{ path('blog_admin_author_show', { 'id': author.id }) }}"  class="btn btn-primary
+                            btn-lg">show</a>
+                            <a href="{{ path('blog_admin_author_edit', { 'id': author.id }) }}"  class="btn btn-success
+                            btn-lg">edit</a>
                     </ul>
                 </td>
             </tr>
@@ -34,8 +32,6 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('blog_admin_author_new') }}">Create a new author</a>
-        </li>
+        <a href="{{ path('blog_admin_author_new') }}" class="btn btn-default btn-lg">Create a new author</a>
     </ul>
 {% endblock %}

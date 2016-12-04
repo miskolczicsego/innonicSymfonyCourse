@@ -4,6 +4,8 @@ read.more: Read more
 name: Name
 send: Send
 logout: Logout
+author: Author
+on: on
 
 
 post:

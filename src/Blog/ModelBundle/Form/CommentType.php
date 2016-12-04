@@ -3,6 +3,9 @@
 namespace Blog\ModelBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,9 +16,9 @@ class CommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('authorName', null, array('label' => 'name'))
-                ->add('body' , null , array('label' => 'comments.singular'))
-                ->add('send' , 'submit' , array('label' => 'send'));
+        $builder->add('authorName', TextType::class, array('label' => 'name'))
+                ->add('body', TextareaType::class, array('label' => 'comments.singular'))
+                ->add('send', SubmitType::class, array('label' => 'send'));
     }
 
     /**
@@ -35,6 +38,4 @@ class CommentType extends AbstractType
     {
         return 'blog_modelbundle_comment';
     }
-
-
 }
