@@ -12,37 +12,26 @@ class AuthorControllerTest extends WebTestCase
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
-        $client = static::createClient(array(), array(
-        'PHP_AUTH_USER' => 'admin',
-        'PHP_AUTH_PW' => 'admin'
-    ));
+        $client = static::createClient(array(), array('PHP_AUTH_USER' => 'admin', 'PHP_AUTH_PW' => 'admin'));
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', 'admin/author/');
-        $this->assertEquals($client->getResponse()->isSuccessful(), "The response was not successful");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        $crawler = $client->request('GET', '/admin/author/');
+        $this->assertTrue($client->getResponse()->isSuccessful(), "The response was not successful");
+        $crawler = $client->click($crawler->selectLink('Create a new author')->link());
 
         // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'blog_modelbundle_author[name]'  => 'Someone',
-        ));
+        $form = $crawler->selectButton('Create')->form(array('blog_modelbundle_author[name]' => 'Someone'));
 
         $client->submit($form);
         $crawler = $client->followRedirect();
 
         // Check data in the show view
-        $this->assertGreaterThan(
-            0,
-            $crawler->filter('td:contains("Someone")')->count(),
-            'The new author is not showing up'
-        );
+        $this->assertGreaterThan(0, $crawler->filter('td:contains("Someone")')->count(), 'The new author is not showing up');
 
         // Edit the entity
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
-        $form = $crawler->selectButton('Update')->form(array(
-            'blog_modelbundle_author[name]' => 'Another'
-        ));
+        $form = $crawler->selectButton('Edit')->form(array('blog_modelbundle_author[name]' => 'Another one'));
 
         $client->submit($form);
         $crawler = $client->followRedirect();

@@ -20,4 +20,8 @@ core:
     type:     annotation
     prefix:   /
 
+user_registration:
+    path:     /register
+    defaults: { _controller: CoreBundle:Registration:register }
+
 

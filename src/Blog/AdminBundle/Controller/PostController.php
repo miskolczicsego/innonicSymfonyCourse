@@ -30,8 +30,17 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $posts = $em->getRepository('ModelBundle:Post')->findAll();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
+        if ($user->getUsername() != 'admin') {
+            $posts = $em->getRepository('ModelBundle:Post')->findBy(
+                array(
+                    'author' => $user
+                )
+            );
+        } else {
+            $posts = $em->getRepository('ModelBundle:Post')->findAll();
+        }
         return $this->render('@Admin/post/index.html.twig', array('posts' => $posts,));
     }
 

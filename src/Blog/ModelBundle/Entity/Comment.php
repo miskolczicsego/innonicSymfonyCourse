@@ -48,6 +48,15 @@ class Comment extends Timestampable
     private $post;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return int
@@ -127,5 +136,24 @@ class Comment extends Timestampable
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Comment
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

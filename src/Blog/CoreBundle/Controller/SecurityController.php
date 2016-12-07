@@ -2,11 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: Csegő
- * Date: 2016. 11. 19.
- * Time: 8:14
+ * Date: 2016. 12. 07.
+ * Time: 0:19
  */
 
-namespace Blog\AdminBundle\Controller;
+namespace Blog\CoreBundle\Controller;
+
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,7 +35,7 @@ class SecurityController extends Controller
         }
 
         return $this->render(
-          'AdminBundle:Security:login.html.twig',
+            'CoreBundle:Security:login.html.twig',
             array(
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error' => $error
@@ -61,5 +62,4 @@ class SecurityController extends Controller
     {
 
     }
-
 }

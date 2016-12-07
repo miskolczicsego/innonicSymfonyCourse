@@ -1,5 +1,7 @@
 security:
     encoders:
+        Blog\ModelBundle\Entity\User: plaintext
+        Blog\ModelBundle\Entity\Author: plaintext
         Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
@@ -9,20 +11,46 @@ security:
         in_memory:
             memory:
                 users:
-                    admin: { password: admin, roles: [ 'ROLE_ADMIN' ] }
+                    admin: { password: admin, roles: [ 'ROLE_SUPER_ADMIN' ] }
+        author:
+            entity:
+                class: ModelBundle:Author
+                property: name
+        user:
+            entity:
+                class: ModelBundle:User
+                property: name
+        admin:
+            chain:
+                providers: [in_memory, author]
+        frontend:
+            chain:
+                providers: [in_memory, user]
 
     firewalls:
          admin_area:
             pattern: ^/admin
             anonymous: ~
-            http_basic:
+            provider: admin
             form_login:
                 login_path: blog_admin_security_login
                 check_path: blog_admin_security_logincheck
             logout:
                 path: blog_admin_security_logout
                 target: /admin/post
+         frontend_area:
+            pattern: ^/en
+            anonymous: ~
+            provider: frontend
+            form_login:
+                login_path: blog_core_security_login
+                check_path: blog_core_security_logincheck
+            logout:
+                path: blog_core_security_logout
+                target: /en
 
     access_control:
         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/en/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/en, roles: ROLE_USER }
