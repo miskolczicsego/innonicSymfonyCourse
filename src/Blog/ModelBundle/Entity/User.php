@@ -222,7 +222,6 @@ class User extends Timestampable implements UserInterface, \Serializable
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
     }
 
     /**
@@ -246,6 +245,6 @@ class User extends Timestampable implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return array('ROLE_USER');
     }
 }

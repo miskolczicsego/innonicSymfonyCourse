@@ -58,7 +58,7 @@ class AuthorController extends Controller
 
         return $this->render(
             'AdminBundle:author:new.html.twig',
-            array('author' => $author, 'form' => $form->createView(),)
+            array('author' => $author, 'form' => $form->createView())
         );
     }
 
@@ -77,7 +77,7 @@ class AuthorController extends Controller
 
         return $this->render(
             'AdminBundle:author:show.html.twig',
-            array('author' => $author, 'delete_form' => $deleteForm->createView(),)
+            array('author' => $author, 'delete_form' => $deleteForm->createView())
         );
     }
 

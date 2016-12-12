@@ -26,7 +26,6 @@ class Comment extends Timestampable
      * @var string
      *
      * @ORM\Column(name="authorName", type="string", length=100)
-     * @Assert\NotBlank()
      */
     private $authorName;
 
@@ -34,7 +33,6 @@ class Comment extends Timestampable
      * @var string
      *
      * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
      */
     private $body;
 

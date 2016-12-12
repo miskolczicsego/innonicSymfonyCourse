@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
 
+
 class SecurityController extends Controller
 {
     /**
@@ -46,7 +47,7 @@ class SecurityController extends Controller
     /**
      * Login check
      *
-     * @Route("/login_check")
+     * @Route("/login_check/")
      */
     public function loginCheckAction()
     {
@@ -56,7 +57,7 @@ class SecurityController extends Controller
     /**
      * Logout action
      *
-     * @Route("logout")
+     * @Route("/logout/")
      */
     public function logoutAction()
     {

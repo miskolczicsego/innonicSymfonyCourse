@@ -3,6 +3,8 @@ namespace Blog\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 /**
  * Created by PhpStorm.
  * User: Csegő
@@ -20,7 +22,7 @@ class DefaultController extends Controller
      * Redirection
      *
      * @Route("/")
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function indexAction()
     {

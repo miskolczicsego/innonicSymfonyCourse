@@ -19,8 +19,8 @@ class TagListerController extends Controller
     /**
      * Give back all tags to posts
      *
-     * @Template("CoreBundle:TagLister:index.html.twig")
-     * @Route("\")
+     * @Template()
+     * @Route("\en")
      * @return array
      */
 
