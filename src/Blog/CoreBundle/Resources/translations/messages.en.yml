@@ -26,3 +26,9 @@ comments:
     plural: Comments
     singular: Comment
     write: Write your comment
+settings: Settings
+anonymous_comment: Anonymous comment
+undefined: undifined
+yes: Yes
+no: No
+anonymous_comment_not_allowed: 'anonymous_comment_not_allowed'

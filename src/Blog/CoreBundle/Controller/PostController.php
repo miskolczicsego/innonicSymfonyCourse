@@ -47,11 +47,19 @@ class PostController extends Controller
      */
     public function showAction($slug)
     {
+        $config = $this->get('configuration');
+
+        $setting = $config->get('anonymous_comment');
+
         $post = $this->getPostManager()->findBySlug($slug);
 
         $form = $this->createForm(new CommentType());
 
-        return array('post' => $post, 'form' => $form->createView());
+        return array(
+            'post' => $post,
+            'form' => $form->createView(),
+            'anonymous_comment' => $setting
+        );
     }
 
     /**

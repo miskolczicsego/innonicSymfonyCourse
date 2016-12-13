@@ -19,15 +19,17 @@ security:
         user:
             entity:
                 class: ModelBundle:User
-                property: name
+                property: email
         admin:
             chain:
                 providers: [in_memory, author]
-        frontend:
-            chain:
-                providers: [in_memory, user]
 
     firewalls:
+
+         dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
          admin_area:
             pattern: ^/admin
             anonymous: ~
@@ -38,19 +40,19 @@ security:
             logout:
                 path: blog_admin_security_logout
                 target: /admin/post
+
          frontend_area:
-            pattern: ^/en
+            pattern: ^/
             anonymous: ~
-            provider: frontend
+            provider: user
             form_login:
                 login_path: blog_core_security_login
                 check_path: blog_core_security_logincheck
             logout:
                 path: blog_core_security_logout
-                target: /en
+                target: blog_core_post_index
 
     access_control:
         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/en/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/en, roles: ROLE_USER }
+        - { path: ^/en/, roles: ROLE_USER }
